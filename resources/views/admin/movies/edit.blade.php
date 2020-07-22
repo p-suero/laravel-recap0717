@@ -17,6 +17,12 @@
           <option value="{{$genre->id}}" {{$genre->id == $movie->genre_id ? 'selected' : ''}}>{{$genre->name}}</option>
         @endforeach
       </select>
+      <div class="form-group">
+          @foreach ($actors as $actor)
+              <input  id="{{"actor" . $actor->id }}" {{$movie->actors->contains($actor) ? "checked" : ""}} type="checkbox" name="actors[]" value="{{$actor->id}}">
+              <label for="{{"actor" . $actor->id }}">{{$actor->getFullName()}}</label>
+          @endforeach
+      </div>
       <button class="btn btn-primary" type="submit">Update</button>
     </form>
   </div>

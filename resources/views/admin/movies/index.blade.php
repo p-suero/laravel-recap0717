@@ -14,6 +14,7 @@
           <th>Overview</th>
           <th>Rating</th>
           <th>Genre</th>
+          <th>Actors</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -25,6 +26,16 @@
             <td>{{$movie->overview}}</td>
             <td>{{$movie->rating}}</td>
             <td>{{$movie->genre->name ?? ''}}</td>
+            <td>
+                @forelse ($movie->actors as $actor)
+                    {{$actor->getFullName()}}
+                    @if (!$loop->last)
+                        ,
+                    @endif
+                @empty
+                    Nessun attore
+                @endforelse
+            </td>
             <td>
               <a class="btn btn-info" href="{{route('admin.movies.show', ['movie' => $movie->id])}}">Details</a>
               <a class="btn btn-warning" href="{{route('admin.movies.edit', ['movie' => $movie->id])}}">Edit</a>
